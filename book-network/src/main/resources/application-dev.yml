@@ -1,0 +1,69 @@
+# Настройки базы данных PostgreSQL
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/book_social_network
+    username: username
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  # Настройки JPA (Java Persistence API)
+  jpa:
+    hibernate:
+      ddl-auto: update # Автоматически обновлять схему базы данных при запуске приложения
+    show-sql: true # Выводить SQL-запросы в логи
+    properties:
+      hibernate:
+        format_sql: true # Форматировать SQL-запросы для удобочитаемости
+    database: postgresql # Тип базы данных
+    database-platform: org.hibernate.dialect.PostgreSQLDialect # Диалект SQL для PostgreSQL
+
+  # Настройки почтового сервера
+#  mail:
+#    host: localhost # Хост почтового сервера
+#    port: 1025 # Порт почтового сервера
+#    username: yaroslav # Имя пользователя для подключения к почтовому серверу
+#    password: yaroslav # Пароль для подключения к почтовому серверу
+#    properties:
+#      mail:
+#        smtp:
+#          trust: "*" # Доверять всем хостам
+#        auth: true # Аутентификация требуется
+#        starttls:
+#          enable: true # Включить протокол STARTTLS для безопасного подключения
+#        connectiontimeout: 5000 # Таймаут подключения к почтовому серверу (миллисекунды)
+#        timeout: 3000 # Таймаут операции чтения/записи (миллисекунды)
+#        writetimeout: 5000 # Таймаут операции записи (миллисекунды)
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: poknok106@gmail.com
+    password: ucja quqz tcig lfol
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+
+# Настройки безопасности приложения
+application:
+  security:
+    jwt:
+      secret-key: 8XPKZ9SSPM4LFG4MJCTIX0WHF27E6L4UJGPY88K3X5IWKJ2AR5TI1G0W7CJQDOGS # Секретный ключ для генерации и проверки JWT-токенов
+      expiration: 8640000 # Время жизни JWT-токена в миллисекундах (24 часа)
+  mailing:
+    frontend:
+      activation-url: http://localhost:4200/activate-account
+  file:
+    upload:
+      photos-output-path: ./uploads
+server:
+  port: 9090
+  # Включение режима отладки
+debug: true
+
+  # Настройки логирования
+logging:
+    level:
+      org.springframework: DEBUG
