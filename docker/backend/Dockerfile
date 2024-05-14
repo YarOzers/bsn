@@ -33,6 +33,10 @@ ENV DB_URL=jdbc:postgresql://postgres-sql-bsn:5432/book_social_network
 ENV ACTIVE_PROFILE=${PROFILE}
 # Версия JAR-файла, который будет запущен
 ENV JAR_VERSION=${APP_VERSION}
+ENV EMAIL_HOST_NAME=missing_host_name
+ENV EMAIL_USER_NAME=missing_user_name
+ENV EMAIL_PASSWORD=missing_password
+
 
 # Устанавливаем команду по умолчанию для запуска контейнера
 CMD java -jar -Dspring.profiles.active=${ACTIVE_PROFILE} -Dspring.datasource.url=${DB_URL} book-network-${JAR_VERSION}.jar
