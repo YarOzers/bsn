@@ -1,6 +1,7 @@
 package com.yaroslav.booknetwork.config;
 
 import lombok.RequiredArgsConstructor; // Автогенерация конструктора для всех финальных полей
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean; // Создание и управление бинами Spring
 import org.springframework.context.annotation.Configuration; // Указывает, что класс содержит конфигурацию Spring
 import org.springframework.data.domain.AuditorAware;
@@ -23,6 +24,9 @@ import java.util.List;
 @Configuration // Класс содержит конфигурацию Spring
 @RequiredArgsConstructor // Создает конструктор с параметрами для всех финальных полей
 public class BeansConfig {
+
+    @Value("${application.cors.origins:*}")
+    private List<String> allowedOrigins;
 
     // Поле для UserDetailsService, используемого при аутентификации пользователей
     private final UserDetailsService userDetailsService;
@@ -71,21 +75,23 @@ public class BeansConfig {
         final CorsConfiguration configuration = new CorsConfiguration(); // Конфигурация CORS
 
         // Устанавливает параметры конфигурации CORS
-        configuration.setAllowCredentials(true); // Разрешает отправку кук
-        configuration.setAllowedOrigins(List.of("http://localhost:8080","http://localhost:4200")); // Разрешенные источники
-        configuration.setAllowedHeaders(Arrays.asList(
-                HttpHeaders.ORIGIN,
-                HttpHeaders.CONTENT_TYPE,
-                HttpHeaders.ACCEPT,
-                HttpHeaders.AUTHORIZATION
-        )); // Разрешенные заголовки
-        configuration.setAllowedMethods(Arrays.asList(
-                "GET",
-                "POST",
-                "DELETE",
-                "PUT",
-                "PATCH"
-        )); // Разрешенные методы
+//        configuration.setAllowCredentials(true); // Разрешает отправку кук
+        configuration.setAllowedOrigins(allowedOrigins); // Разрешенные источники
+        configuration.setAllowedHeaders(Arrays.asList("*"));// не рекомендуется в проде
+//        configuration.setAllowedHeaders(Arrays.asList(
+//                HttpHeaders.ORIGIN,
+//                HttpHeaders.CONTENT_TYPE,
+//                HttpHeaders.ACCEPT,
+//                HttpHeaders.AUTHORIZATION
+//        )); // Разрешенные заголовки
+        configuration.setAllowedMethods(Arrays.asList("*"));// не рекомендуется в проде
+//        configuration.setAllowedMethods(Arrays.asList(
+//                "GET",
+//                "POST",
+//                "DELETE",
+//                "PUT",
+//                "PATCH"
+//        )); // Разрешенные методы
 
         // Регистрирует конфигурацию CORS для всех путей
         source.registerCorsConfiguration("/**", configuration);

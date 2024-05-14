@@ -35,9 +35,12 @@ spring:
 #        writetimeout: 5000 # Таймаут операции записи (миллисекунды)
   mail:
     host: smtp.gmail.com
+#    host: ${EMAIL_HOST_NAME}
     port: 587
     username: poknok106@gmail.com
+#    username: ${EMAIL_USER_NAME}
     password: ucja quqz tcig lfol
+#    password: ${EMAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -55,6 +58,8 @@ application:
   mailing:
     frontend:
       activation-url: http://localhost:4200/activate-account
+  cors:
+    origins: http://localhost:8080,http://localhost:4200,http://95.31.234.122:9090
   file:
     upload:
       photos-output-path: ./uploads
