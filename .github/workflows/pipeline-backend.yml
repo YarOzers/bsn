@@ -53,6 +53,7 @@ jobs:
 #          cd book-network
 #          echo "Running unit tests..."
 #          ./mvnw clean test
+#
 
   build:
     runs-on: self-hosted
