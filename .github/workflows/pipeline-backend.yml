@@ -33,26 +33,27 @@ jobs:
           echo "Compiling project..."
           ./mvnw clean compile
 
-#  unit-tests:
-#    runs-on: self-hosted
-#    name: Unit tests
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v4
-#        with:
-#          fetch-depth: 0
-#
-#      - name: Setup JDK
-#        uses: actions/setup-jdk@v4
-#        with:
-#          java-version: 17
-#          distribution: 'corretto'
-#
-#      - name: Running unit Tests
-#        run: |
-#          cd book-network
-#          echo "Running unit tests..."
-#          ./mvnw clean test
+  unit-tests:
+    runs-on: self-hosted
+    name: Unit tests
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup JDK
+        uses: actions/setup-jdk@v4
+        with:
+          java-version: 17
+          distribution: 'corretto'
+
+      - name: Running unit Tests
+        run: |
+          cd book-network
+          echo "Running unit tests..."
+          ./mvnw clean test
+
 
   build:
     runs-on: self-hosted
