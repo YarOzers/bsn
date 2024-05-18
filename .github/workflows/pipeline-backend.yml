@@ -118,10 +118,10 @@ jobs:
           file: docker/backend/Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/bsn-api:${{ steps.extract_version.outputs.VERSION }},b${{secrets.DOCKERHUB_USERNAME}}/bsn-api:latest
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/bsn-api:${{ steps.extract_version.outputs.VERSION }},${{secrets.DOCKERHUB_USERNAME}}/bsn-api:latest
           build-args: |
             PROFILE=dev
-            APP_VERSION= ${{ steps.extract_version.outputs.VERSION }}
+            APP_VERSION=${{ steps.extract_version.outputs.VERSION }}
 
   deploy:
     name: Deploy backend
@@ -131,17 +131,17 @@ jobs:
       - name: Create deployment folder
         run: |
           echo "Creating deployment folder on server..."
-          ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd"
+          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd"
 
       - name: Copy docker-compose file
         run: |
           echo "Copying docker-compose file to server..."
-          scp docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml
+          sshpass -p ${{ secrets.VPS_PASSWORD }} scp docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml
 
       - name: Set ENV variables and deploy
         run: |
           echo "Setting environment variables and deploying..."
-          ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
+          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
           export EMAIL_HOST_NAME=${{ secrets.EMAIL_HOST_NAME }}
           export EMAIL_USER_NAME=${{ secrets.EMAIL_USER_NAME }}
           export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
