@@ -152,17 +152,17 @@ jobs:
       - name: Create deployment folder
         run: |
           echo "Creating deployment folder on server..."
-          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd"
+          sshpass -p ${{ secrets.VPS_PASSWORD }} -p {{ secrets.VPS_PORT }} ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd"
 
       - name: Copy docker-compose file
         run: |
           echo "Copying docker-compose file to server..."
-          sshpass -p ${{ secrets.VPS_PASSWORD }} scp docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml
+          sshpass -p ${{ secrets.VPS_PASSWORD }} -p {{ secrets.VPS_PORT }} scp docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml
 
       - name: Set ENV variables and deploy
         run: |
           echo "Setting environment variables and deploying..."
-          sshpass -p ${{ secrets.VPS_PASSWORD }} -p {{ secrets.VPS_PORT }}ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
+          sshpass -p ${{ secrets.VPS_PASSWORD }} -p {{ secrets.VPS_PORT }} ssh ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
           export EMAIL_HOST_NAME=${{ secrets.EMAIL_HOST_NAME }}
           export EMAIL_USER_NAME=${{ secrets.EMAIL_USER_NAME }}
           export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
