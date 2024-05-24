@@ -24,7 +24,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-jdk@v3
         with:
-          java-version: 17
+          java-version: '17'
           distribution: 'temurin'
 
       - name: Compile project
@@ -45,7 +45,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-jdk@v3
         with:
-          java-version: 17
+          java-version: '17'
           distribution: 'temurin'
 
       - name: Running unit Tests
@@ -68,7 +68,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-jdk@v3
         with:
-          java-version: 17
+          java-version: '17'
           distribution: 'temurin'
 
       - name: Build project
@@ -90,7 +90,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-jdk@v3
         with:
-          java-version: 17
+          java-version: '17'
           distribution: 'temurin'
 
       - name: Build project
