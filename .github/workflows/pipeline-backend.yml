@@ -27,6 +27,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Make mvnw executable
+        run: |
+          cd book-network
+          chmod +x mvnw
+
       - name: Compile project
         run: |
           cd book-network
@@ -47,6 +52,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+
+      - name: Make mvnw executable
+        run: |
+          cd book-network
+          chmod +x mvnw
 
       - name: Running unit Tests
         run: |
