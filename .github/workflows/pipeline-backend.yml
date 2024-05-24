@@ -152,7 +152,7 @@ jobs:
       - name: Create deployment folder
         run: |
           echo "Creating deployment folder on server..."
-          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p {{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd"
+          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd"
 
       - name: Copy docker-compose file
         run: |
@@ -162,7 +162,7 @@ jobs:
       - name: Set ENV variables and deploy
         run: |
           echo "Setting environment variables and deploying..."
-          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p {{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
+          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
           export EMAIL_HOST_NAME=${{ secrets.EMAIL_HOST_NAME }}
           export EMAIL_USER_NAME=${{ secrets.EMAIL_USER_NAME }}
           export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
