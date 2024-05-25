@@ -163,7 +163,7 @@ jobs:
         run: |
           echo "Creating deployment folder on server..."
           echo "sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} mkdir -p ci-cd"
-          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd" || (echo "Error during SSH command" && exit 1)
+          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd" 2>&1 || (echo "Error during SSH command" && exit 1)
 
       - name: Copy docker-compose file
         run: |
