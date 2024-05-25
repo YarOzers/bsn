@@ -20,6 +20,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Добавляем шаг для использования SSH ключа
+      - name: Use SSH key
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
@@ -128,8 +134,8 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
-          username: ${{secrets.DOCKERHUB_USERNAME}}
-          password: ${{secrets.DOCKERHUB_TOKEN}}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build & Push to DockerHub
         uses: docker/build-push-action@v4
@@ -138,7 +144,7 @@ jobs:
           file: docker/backend/Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/bsn-api:${{ env.VERSION }},${{secrets.DOCKERHUB_USERNAME}}/bsn-api:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/bsn-api:${{ env.VERSION }},${{ secrets.DOCKERHUB_USERNAME }}/bsn-api:latest
           build-args: |
             PROFILE=dev
             APP_VERSION=${{ env.VERSION }}
@@ -146,12 +152,18 @@ jobs:
   deploy:
     name: Deploy backend
     runs-on: self-hosted
-    needs: [build-image]
+    needs: [ build-image ]
     steps:
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Create deployment folder
         run: |
           echo "Creating deployment folder on server..."
-          sshpass -p 123 ssh -p 2222 yarozers@188.232.26.204 ls || (echo "Error during SSH command" && exit 1)
+          echo "sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} mkdir -p ci-cd"
+          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd" || (echo "Error during SSH command" && exit 1)
 
       - name: Copy docker-compose file
         run: |
@@ -169,3 +181,4 @@ jobs:
           docker-compose -f docker-compose.yml pull -q
           docker-compose -f docker-compose.yml up -d
           EOF
+      
