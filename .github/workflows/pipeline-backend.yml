@@ -152,12 +152,12 @@ jobs:
         run: |
           echo "Creating deployment folder on server..."
           echo "sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} mkdir -p ci-cd"
-          sshpass -p 123 ssh -p 2222 yarozers@188.232.26.204 "mkdir -p ci-cd" || (echo "Error during SSH command" && exit 1)
+          sshpass -p 123 ssh -p 2222 yarozers@188.232.26.204 ls || (echo "Error during SSH command" && exit 1)
 
       - name: Copy docker-compose file
         run: |
           echo "Copying docker-compose file to server..."
-          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -vvv -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "ls" || (echo "Error during SSH command" && exit 1)
+          sshpass -p ${{ secrets.VPS_PASSWORD }} scp -P ${{ secrets.VPS_PORT }} docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml || (echo "Error during SCP command" && exit 1)
 
       - name: Set ENV variables and deploy
         run: |
