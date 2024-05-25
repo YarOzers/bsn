@@ -150,8 +150,8 @@ jobs:
     steps:
       - name: Create deployment folder
         run: |
-          echo "Creating deployment folder on server...
-          sshpass -p 123 ssh -p 2222 yarozers@188.232.26.204 "ls" || (echo "Error during SSH command" && exit 1)
+          echo "Creating deployment folder on server..."
+          sshpass -p 123 ssh -p 2222 yarozers@188.232.26.204 ls || (echo "Error during SSH command" && exit 1)
 
       - name: Copy docker-compose file
         run: |
