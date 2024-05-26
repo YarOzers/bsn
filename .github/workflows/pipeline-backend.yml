@@ -160,25 +160,36 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Create deployment folder
-        run: |
-          echo "Creating deployment folder on server..."
-          echo "sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} mkdir -p ci-cd"
-          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd" 2>&1 || (echo "Error during SSH command" && exit 1)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_PORT }}
+          script: sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd" 2>&1 || (echo "Error during SSH command" && exit 1)
 
       - name: Copy docker-compose file
-        run: |
-          echo "Copying docker-compose file to server..."
-          sshpass -p ${{ secrets.VPS_PASSWORD }} scp -P ${{ secrets.VPS_PORT }} docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml || (echo "Error during SCP command" && exit 1)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_PORT }}
+          script: sshpass -p ${{ secrets.VPS_PASSWORD }} scp -P ${{ secrets.VPS_PORT }} docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml || (echo "Error during SCP command" && exit 1)
 
       - name: Set ENV variables and deploy
-        run: |
-          echo "Setting environment variables and deploying..."
-          sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
-          export EMAIL_HOST_NAME=${{ secrets.EMAIL_HOST_NAME }}
-          export EMAIL_USER_NAME=${{ secrets.EMAIL_USER_NAME }}
-          export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
-          cd ci-cd
-          docker-compose -f docker-compose.yml pull -q
-          docker-compose -f docker-compose.yml up -d
-          EOF
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_PORT }}
+          script: sshpass -p ${{ secrets.VPS_PASSWORD }} ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
+            export EMAIL_HOST_NAME=${{ secrets.EMAIL_HOST_NAME }}
+            export EMAIL_USER_NAME=${{ secrets.EMAIL_USER_NAME }}
+            export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
+            cd ci-cd
+            docker-compose -f docker-compose.yml pull -q
+            docker-compose -f docker-compose.yml up -d
+            EOF
       
