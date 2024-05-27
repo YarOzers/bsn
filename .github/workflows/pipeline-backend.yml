@@ -170,7 +170,7 @@ jobs:
       - name: Copy docker-compose file
         run: |
           echo "Copying docker-compose file to server..."
-          scp -P ${{ secrets.VPS_PORT }} docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml || (echo "Error during SCP command" && exit 1)
+          scp -P ${{ secrets.VPS_PORT }}  book-network/docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml || (echo "Error during SCP command" && exit 1)
 
       - name: Set ENV variables and deploy
         run: |
