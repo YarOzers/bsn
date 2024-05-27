@@ -162,6 +162,11 @@ jobs:
           echo "Creating deployment folder on server..."
           ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "mkdir -p ci-cd" || (echo "Error during SSH command" && exit 1)
 
+      - name: Check current directory content
+        run: |
+          echo "Checking current directory content..."
+          ls -la
+
       - name: Copy docker-compose file
         run: |
           echo "Copying docker-compose file to server..."
