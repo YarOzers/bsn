@@ -14,6 +14,7 @@ import lombok.Setter;
 @Builder
 public class AuthenticationRequest {
 
+
     @Email(message = "Email is not formatted") // Аннотация для проверки, что поле email имеет правильный формат электронной почты
     @NotEmpty(message = "Email is mandatory") // Аннотация для проверки, что поле email не пустое
     @NotBlank(message = "Email is mandatory") // Аннотация для проверки, что поле email не пустое и содержит хотя бы один непробельный символ
