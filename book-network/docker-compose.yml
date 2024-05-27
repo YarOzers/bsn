@@ -1,4 +1,4 @@
-services:
+service:
   # PostgreSQL - Сервис базы данных
 #  postgres:
 #    container_name: postgres-sql-bsn  # Имя контейнера в Docker
@@ -31,7 +31,7 @@ services:
     ports:  # Проброс портов
       - 9090:9090  # Пробрасываем порт 9090 приложения
     networks:  # Сеть, в которой контейнер будет работать
-#      - spring-demo
+      - spring-demo
 #    depends_on:  # Зависимости этого сервиса
 #      - postgres  # Сначала должен запуститься сервис PostgreSQL
 #  bsn-ui:
