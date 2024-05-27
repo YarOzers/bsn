@@ -172,6 +172,13 @@ jobs:
           echo "Copying docker-compose file to server..."
           scp -P ${{ secrets.VPS_PORT }}  book-network/docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml || (echo "Error during SCP command" && exit 1)
 
+      - name: Login to DockerHub on server
+        run: |
+          echo "Logging in to DockerHub on server..."
+          ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+          EOF
+
       - name: Set ENV variables and deploy
         run: |
           echo "Setting environment variables and deploying..."
