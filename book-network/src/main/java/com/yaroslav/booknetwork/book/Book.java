@@ -31,6 +31,7 @@ public class Book extends BaseEntity { // Наследуется от BaseEntity
     String title; // Название книги
     String authorName; // Имя автора
     String isbn; // Международный стандартный книжный номер
+    @Column(columnDefinition = "TEXT")
     String synopsis; // Краткое описание или аннотация книги
     @Column(columnDefinition = "TEXT")
     String bookCover; // Обложка книги (может быть ссылка на изображение)
