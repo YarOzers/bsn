@@ -1,7 +1,7 @@
 # Настройки базы данных PostgreSQL
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/book_social_network
+    url: jdbc:postgresql://postgres-sql-bsn:5433/book_social_network
     username: username
     password: password
     driver-class-name: org.postgresql.Driver
@@ -59,7 +59,7 @@ application:
     frontend:
       activation-url: http://localhost:4200/activate-account
   cors:
-    origins: http://localhost:8080,http://localhost:4200,http://95.31.234.122:9090
+    origins: http://localhost:8080,http://localhost:4200,http://77.238.226.130:9090
   file:
     upload:
       photos-output-path: ./uploads
