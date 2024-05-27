@@ -15,6 +15,9 @@ jobs:
     name: Build FE Docker image
     runs-on: self-hosted
     steps:
+      - name: Install jq
+        run: sudo apt-get install jq
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
