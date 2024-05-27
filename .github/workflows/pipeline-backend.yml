@@ -14,7 +14,6 @@ jobs:
   deployBD:
     name: Deploy BD
     runs-on: self-hosted
-    needs: [ build-image ]
     steps:
       - name: Setup SSH key
         uses: webfactory/ssh-agent@v0.5.3
