@@ -72,7 +72,7 @@ jobs:
         run: |
           echo "Setting environment variables and deploying..."
           ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
-          cd ci-cd
+          cd ci-cd-ui
           docker-compose -f docker-compose.yml pull -q
           docker-compose -f docker-compose.yml up -d
           EOF
