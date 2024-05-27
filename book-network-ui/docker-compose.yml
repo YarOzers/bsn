@@ -41,8 +41,8 @@ services:
       - 8080:80
     networks:
       - spring-demo
-    depends_on:
-      - bsn-api
+#    depends_on:
+#      - bsn-api
 # Определение сети, в которой будут работать контейнеры
 networks:
   spring-demo:
