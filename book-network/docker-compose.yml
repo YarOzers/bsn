@@ -1,30 +1,30 @@
 services:
   # PostgreSQL - Сервис базы данных
-  postgres:
-    container_name: postgres-sql-bsn  # Имя контейнера в Docker
-    image: postgres  # Используемый образ Docker
-    environment:  # Переменные окружения для настройки PostgreSQL
-      POSTGRES_USER: username  # Имя пользователя для доступа к БД
-      POSTGRES_PASSWORD: password  # Пароль пользователя для доступа к БД
-      PGDATA: var/lib/postgresql/data  # Путь к данным PostgreSQL
-      POSTGRES_DB: book_social_network  # Имя создаваемой базы данных
-    volumes:  # Настройка постоянного хранения данных
-      - postgres:/data/postgres  # Используемый том для хранения данных БД
-    ports:  # Проброс портов
-      - 5433:5432  # Пробрасываем порт 5432 PostgreSQL в 5433 на хосте
-    networks:  # Сеть, в которой контейнер будет работать
-      - spring-demo
-    restart: unless-stopped  # Автоматический перезапуск, если контейнер остановится
-
-  # MailDev - Сервис для эмуляции почтового сервера (для тестирования почты)
-  mail-dev:
-    container_name: mail-dev-bsn  # Имя контейнера
-    image: maildev/maildev  # Используемый образ Docker
-    ports:  # Проброс портов
-      - 1080:1080  # Веб-интерфейс MailDev
-      - 1025:1025  # SMTP-порт для отправки почты
-
-  # Основной API - Сервис с Java-приложением
+#  postgres:
+#    container_name: postgres-sql-bsn  # Имя контейнера в Docker
+#    image: postgres  # Используемый образ Docker
+#    environment:  # Переменные окружения для настройки PostgreSQL
+#      POSTGRES_USER: username  # Имя пользователя для доступа к БД
+#      POSTGRES_PASSWORD: password  # Пароль пользователя для доступа к БД
+#      PGDATA: var/lib/postgresql/data  # Путь к данным PostgreSQL
+#      POSTGRES_DB: book_social_network  # Имя создаваемой базы данных
+#    volumes:  # Настройка постоянного хранения данных
+#      - postgres:/data/postgres  # Используемый том для хранения данных БД
+#    ports:  # Проброс портов
+#      - 5433:5432  # Пробрасываем порт 5432 PostgreSQL в 5433 на хосте
+#    networks:  # Сеть, в которой контейнер будет работать
+#      - spring-demo
+#    restart: unless-stopped  # Автоматический перезапуск, если контейнер остановится
+#
+#  # MailDev - Сервис для эмуляции почтового сервера (для тестирования почты)
+#  mail-dev:
+#    container_name: mail-dev-bsn  # Имя контейнера
+#    image: maildev/maildev  # Используемый образ Docker
+#    ports:  # Проброс портов
+#      - 1080:1080  # Веб-интерфейс MailDev
+#      - 1025:1025  # SMTP-порт для отправки почты
+#
+#  # Основной API - Сервис с Java-приложением
   bsn-api:
     container_name: bsn-api  # Имя контейнера
     image: yaroslavozerskiy/bsn-api:1.0.0  # Используемый образ Docker (ваше Java-приложение)
