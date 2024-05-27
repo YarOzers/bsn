@@ -16,7 +16,7 @@ services:
       - spring-demo
     restart: unless-stopped  # Автоматический перезапуск, если контейнер остановится
 
-  # MailDev - Сервис для эмуляции почтового сервера (для тестирования почты)
+#   MailDev - Сервис для эмуляции почтового сервера (для тестирования почты)
   mail-dev:
     container_name: mail-dev-bsn  # Имя контейнера
     image: maildev/maildev  # Используемый образ Docker
@@ -25,15 +25,15 @@ services:
       - 1025:1025  # SMTP-порт для отправки почты
 
   # Основной API - Сервис с Java-приложением
-  bsn-api:
-    container_name: bsn-api  # Имя контейнера
-    image: bsn/bsn:1.0.0  # Используемый образ Docker (ваше Java-приложение)
-    ports:  # Проброс портов
-      - 9090:9090  # Пробрасываем порт 9090 приложения
-    networks:  # Сеть, в которой контейнер будет работать
-      - spring-demo
-    depends_on:  # Зависимости этого сервиса
-      - postgres  # Сначала должен запуститься сервис PostgreSQL
+#  bsn-api:
+#    container_name: bsn-api  # Имя контейнера
+#    image: bsn/bsn:1.0.0  # Используемый образ Docker (ваше Java-приложение)
+#    ports:  # Проброс портов
+#      - 9090:9090  # Пробрасываем порт 9090 приложения
+#    networks:  # Сеть, в которой контейнер будет работать
+#      - spring-demo
+#    depends_on:  # Зависимости этого сервиса
+#      - postgres  # Сначала должен запуститься сервис PostgreSQL
 #  bsn-ui:
 #    container_name: bsn-ui
 #    image: bsn/bsn-ui:1.0.0
