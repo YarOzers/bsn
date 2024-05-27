@@ -27,7 +27,7 @@ services:
   # Основной API - Сервис с Java-приложением
   bsn-api:
     container_name: bsn-api  # Имя контейнера
-    image: bsn/bsn:1.0.0  # Используемый образ Docker (ваше Java-приложение)
+    image: yaroslavozerskiy/bsn-api:1.0.0  # Используемый образ Docker (ваше Java-приложение)
     ports:  # Проброс портов
       - 9090:9090  # Пробрасываем порт 9090 приложения
     networks:  # Сеть, в которой контейнер будет работать
