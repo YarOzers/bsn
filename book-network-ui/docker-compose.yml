@@ -36,7 +36,7 @@ services:
 #      - postgres  # Сначала должен запуститься сервис PostgreSQL
   bsn-ui:
     container_name: bsn-ui
-    image: bsn/bsn-ui:1.0.0
+    image: yaroslavozerskiy/bsn-ui:1.0.0
     ports:
       - 8080:80
     networks:
