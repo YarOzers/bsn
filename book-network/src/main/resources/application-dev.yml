@@ -57,18 +57,18 @@ application:
       expiration: 8640000 # Время жизни JWT-токена в миллисекундах (24 часа)
   mailing:
     frontend:
-      activation-url: http://localhost:4200/activate-account
+      activation-url: http://bsn-ui:4200/activate-account
   cors:
-    origins: http://localhost:8080,http://localhost:4200,http://188.235.130.37
+    origins: http://localhost:8080,http://localhost:4200,http://188.235.130.37,http://bsn-ui:8080
   file:
     upload:
       photos-output-path: ./uploads
 server:
   port: 9090
   # Включение режима отладки
-debug: true
+debug: false
 
   # Настройки логирования
 logging:
     level:
-      org.springframework: DEBUG
+      org.springframework: debug
