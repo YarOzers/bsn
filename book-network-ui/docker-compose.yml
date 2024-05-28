@@ -6,10 +6,13 @@ services:
       - 8080:80
     networks:
       - spring-demo
+
 networks:
   spring-demo:
-    driver: bridge  # Используемый драйвер сети (Bridge - стандартный для Docker)
-# Определение томов, используемых для постоянного хранения данных
+    name: spring-demo  # Явное указание имени сети
+    driver: bridge
+
 volumes:
   postgres:
-    driver: local  # Используемый драйвер томов (Local - стандартный для Docker)
+    driver: local
+
