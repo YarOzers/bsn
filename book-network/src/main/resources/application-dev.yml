@@ -59,7 +59,7 @@ application:
     frontend:
       activation-url: http://bsn-ui:4200/activate-account
   cors:
-    origins: http://localhost:8080,http://localhost:4200,http://188.235.130.37,http://bsn-ui:8080
+    origins: * # http://localhost:8080,http://localhost:4200,http://188.235.130.37,http://bsn-ui:8080
   file:
     upload:
       photos-output-path: ./uploads
