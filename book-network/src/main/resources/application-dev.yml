@@ -1,7 +1,7 @@
 # Настройки базы данных PostgreSQL
 spring:
   datasource:
-    url: jdbc:postgresql://postgres-sql-bsn:5432/book_social_network
+    url: jdbc:postgresql://postgres-sql-bsn:5433/book_social_network
     username: username
     password: password
     driver-class-name: org.postgresql.Driver
