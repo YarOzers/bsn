@@ -39,6 +39,11 @@ jobs:
           echo "Copying docker-compose file to server..."
           scp -P ${{ secrets.VPS_PORT }}  docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd-bd/docker-compose.yml || (echo "Error during SCP command" && exit 1)
 
+      - name: Create Docker network
+        run: |
+          echo "Creating Docker network on server..."
+          ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} "docker network create spring-demo || true"
+
       - name: Set ENV variables and deploy
         run: |
           echo "Setting environment variables and deploying..."

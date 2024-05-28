@@ -1,32 +1,35 @@
+version: '3.8'
+
 services:
-  # PostgreSQL - Сервис базы данных
   postgres:
-    container_name: postgres-sql-bsn  # Имя контейнера в Docker
-    image: postgres  # Используемый образ Docker
-    environment:  # Переменные окружения для настройки PostgreSQL
-      POSTGRES_USER: username  # Имя пользователя для доступа к БД
-      POSTGRES_PASSWORD: password  # Пароль пользователя для доступа к БД
-      PGDATA: var/lib/postgresql/data  # Путь к данным PostgreSQL
-      POSTGRES_DB: book_social_network  # Имя создаваемой базы данных
-    volumes:  # Настройка постоянного хранения данных
-      - postgres:/data/postgres  # Используемый том для хранения данных БД
-    ports:  # Проброс портов
-      - 5433:5432  # Пробрасываем порт 5432 PostgreSQL в 5433 на хосте
-    networks:  # Сеть, в которой контейнер будет работать
+    container_name: postgres-sql-bsn
+    image: postgres
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: book_social_network
+    volumes:
+      - postgres:/var/lib/postgresql/data  # Обратите внимание на исправление пути к данным
+    ports:
+      - 5433:5432
+    networks:
       - spring-demo
-    restart: unless-stopped  # Автоматический перезапуск, если контейнер остановится
-#   MailDev - Сервис для эмуляции почтового сервера (для тестирования почты)
+    restart: unless-stopped
+
   mail-dev:
-    container_name: mail-dev-bsn  # Имя контейнера
-    image: maildev/maildev  # Используемый образ Docker
-    ports:  # Проброс портов
-      - 1080:1080  # Веб-интерфейс MailDev
-      - 1025:1025  # SMTP-порт для отправки почты
+    container_name: mail-dev-bsn
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+    networks:
+      - spring-demo
+
 networks:
   spring-demo:
-    driver: bridge  # Используемый драйвер сети (Bridge - стандартный для Docker)
+    external: true
 
-# Определение томов, используемых для постоянного хранения данных
 volumes:
   postgres:
-    driver: local  # Используемый драйвер томов (Local - стандартный для Docker)
+    driver: local

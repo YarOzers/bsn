@@ -1,20 +1,18 @@
-version: '3.8'  # Версия Docker Compose
+version: '3.8'
 
 services:
   bsn-api:
-    container_name: bsn-api  # Имя контейнера
-    image: yaroslavozerskiy/bsn-api:1.0.0  # Используемый образ Docker (ваше Java-приложение)
-    ports:  # Проброс портов
-      - 9090:9090  # Пробрасываем порт 9090 приложения
-    networks:  # Сеть, в которой контейнер будет работать
+    container_name: bsn-api
+    image: yaroslavozerskiy/bsn-api:1.0.0
+    ports:
+      - 9090:9090
+    networks:
       - spring-demo
 
 networks:
   spring-demo:
-    driver: bridge  # Используемый драйвер сети (Bridge - стандартный для Docker)
+    external: true
 
-# Определение томов, используемых для постоянного хранения данных
 volumes:
   postgres:
-    driver: local  # Используемый драйвер томов (Local - стандартный для Docker)
-
+    driver: local
