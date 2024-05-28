@@ -28,6 +28,7 @@ services:
 
 networks:
   spring-demo:
+    name: spring-demo
     external: true
 
 volumes:

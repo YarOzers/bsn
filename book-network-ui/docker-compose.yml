@@ -10,6 +10,7 @@ services:
 networks:
   spring-demo:
     name: spring-demo  # Явное указание имени сети
+    external: true
     driver: bridge
 
 volumes:
