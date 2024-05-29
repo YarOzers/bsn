@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiConfiguration {
-  rootUrl: string = 'http://bsn-api:9090/api/v1';
+  rootUrl: string = 'http://188.235.130.37:9090/api/v1';
 }
 
 /**
