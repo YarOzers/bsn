@@ -1,0 +1,17 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h2>Articles</h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li *ngFor="let article of articles" class="list-group-item">
+          <a [routerLink]="['/articles', article.id]">
+            <h5>{{ article.title }}</h5>
+            <p>{{ article.content }}</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

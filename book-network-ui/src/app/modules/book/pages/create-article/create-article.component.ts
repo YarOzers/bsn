@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
+import {QuillEditorComponent} from "ngx-quill";
 
 @Component({
   selector: 'app-create-article',
   templateUrl: './create-article.component.html',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    QuillEditorComponent
   ],
   styleUrls: ['./create-article.component.scss']
 })

@@ -9,6 +9,8 @@ import {ReturnBooksComponent} from "./pages/return-books/return-books.component"
 import {authGuard} from "../../services/guard/auth.guard";
 import {WaitingListComponent} from "./pages/waiting-list/waiting-list.component";
 import {CreateArticleComponent} from "./pages/create-article/create-article.component";
+import {ArticleListComponent} from "./pages/article-list/article-list.component";
+import {ArticleDetailComponent} from "./pages/article-detail/article-detail.component";
 
 const routes: Routes = [
   {
@@ -52,12 +54,21 @@ const routes: Routes = [
         canActivate: [authGuard]
       },
       {
+        path: "articles",
+        component: ArticleListComponent,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'articles/:id',
+        component: ArticleDetailComponent
+      },
+      {
         path: "create-article",
         component: CreateArticleComponent,
         canActivate: [authGuard]
       },
       {
-        path: '**',redirectTo: '',
+        path: '**', redirectTo: '',
         component: BookListComponent,
         canActivate: [authGuard]
       }
