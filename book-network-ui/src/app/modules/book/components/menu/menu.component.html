@@ -1,85 +1,55 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <!-- Это элемент навигационной панели. Класс `navbar` определяет его как навигационную панель, а `navbar-expand-lg` позволяет панели расширяться на больших экранах. `bg-body-tertiary` - класс для изменения цвета фона. -->
-
   <div class="container-fluid">
-    <!-- Этот `div` используется для обертывания элементов навигационной панели, обеспечивая им более строгую структуру и выравнивание. -->
-
-    <a class="navbar-brand" href="javascript:void (0)">BSN</a>
-    <!-- Этот элемент `a` представляет собой бренд навигационной панели. Обычно он ведет на главную страницу сайта. `href="javascript:void(0)"` означает, что ссылка не ведет на реальный URL, вероятно, для демонстрационных целей. -->
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportContent" aria-controls="navbarSupportContent"
-            aria-expanded="false" aria-label="Toggle navigation"
-    >
+    <a class="navbar-brand" href="javascript:void(0)">BSN</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportContent" aria-controls="navbarSupportContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- Кнопка для переключения состояния навигационной панели (разворачивание/сворачивание). Используется на мобильных устройствах, чтобы сэкономить пространство. `data-bs-toggle` и `data-bs-target` определяют, какой элемент сворачивать/разворачивать. -->
-
     <div class="collapse navbar-collapse" id="navbarSupportContent">
-      <!-- Этот `div` содержит элементы навигационной панели, которые могут быть свернуты или развернуты. `id="navbarSupportContent"` позволяет переключателю знать, на что влиять. -->
-
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <!-- Этот `ul` содержит элементы меню. Класс `me-auto` выравнивает элементы по левому краю, создавая пространство между ними и элементами с правой стороны панели. `mb-2 mb-lg-0` обеспечивает разный нижний отступ для разных экранов. -->
-
         <li class="nav-item">
           <a class="nav-link" aria-current="page" routerLink="./">
             <i class="fas fa-home-alt"></i>&nbsp;Home
           </a>
         </li>
-        <!-- `li` содержит отдельные элементы навигационной панели. `routerLink` указывает маршрут или ссылку, а `aria-current` показывает, что эта ссылка указывает на текущую страницу. Внутри `a` мы видим иконку (используя `font-awesome`) и текст "Home". -->
-
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" routerLink="my-books">
+          <a class="nav-link" aria-current="page" routerLink="my-books">
             <i class="fas fa-book"></i>&nbsp;My books
           </a>
         </li>
-        <!-- Этот элемент указывает на "My books". -->
-
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" routerLink="waiting-list">
+          <a class="nav-link" aria-current="page" routerLink="waiting-list">
             <i class="fas fa-hourglass-start"></i>&nbsp;Waiting list
           </a>
         </li>
-        <!-- Этот элемент указывает на "Waiting list". -->
-
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" routerLink="my-returned-books">
+          <a class="nav-link" aria-current="page" routerLink="my-returned-books">
             <i class="fas fa-arrow-rotate-left"></i>&nbsp;My returned books
           </a>
         </li>
-        <!-- Этот элемент указывает на "My returned books". -->
-
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" routerLink="my-borrowed-books">
+          <a class="nav-link" aria-current="page" routerLink="my-borrowed-books">
             <i class="fas fa-check"></i>&nbsp;Borrowed books
           </a>
         </li>
-        <!-- Этот элемент указывает на "Borrowed books". -->
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="articles">
+            <i class="fas fa-list"></i>&nbsp;Articles
+          </a>
+        </li>
 
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="create-article">
+            <i class="fas fa-pen"></i>&nbsp;add Article
+          </a>
+        </li>
       </ul>
-
       <form class="d-flex gap-2 align-items-center" role="search">
-        <!-- Этот `form` используется для поиска. Класс `d-flex` делает его гибким, `gap-2` добавляет пространство между элементами, а `align-items-center` выравнивает элементы по центру. -->
-
         <input class="form-control" type="text" placeholder="Find a book" aria-label="Search">
-        <!-- Поле ввода для поиска книг. Класс `form-control` определяет стиль ввода, а `placeholder` - текст-заполнитель. -->
-
         <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
-        <!-- Кнопка для отправки формы, с иконкой поиска. -->
-
         <span>Welcome</span>
         <span class="text-capitalize fw-bold">{{decodedToken.fullName.firstname}}</span>
-        <!-- Приветствие с именем пользователя, где `text-capitalize` делает первый символ заглавным, а `fw-bold` делает текст полужирным. -->
-
         <button class="btn btn-link" type="button" (click)="logout()"><i class="fas fa-door-open"></i></button>
-        <!-- Кнопка выхода, с иконкой двери. -->
-
       </form>
-
     </div>
-    <!-- Конец области, которая может быть свернута/развернута. -->
-
   </div>
-  <!-- Конец `container-fluid`, обертывающего все элементы навигационной панели. -->
-
 </nav>
