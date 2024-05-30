@@ -1,0 +1,18 @@
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group-item h5 {
+  margin: 0;
+}
+
+.list-group-item div {
+  transition: all 0.3s ease;
+}
+
+.list-group-item h5.selected {
+  background-color: #56b7ff;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}

@@ -4,8 +4,7 @@
       <h2>{{ article.title }}</h2>
     </div>
     <div class="card-body">
-      <p>{{ article.content }}</p>
+      <div [innerHTML]="article.content | safeHtml"></div>
     </div>
   </div>
 </div>
-

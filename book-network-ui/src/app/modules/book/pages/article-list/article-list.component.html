@@ -6,12 +6,13 @@
     <div class="card-body">
       <ul class="list-group">
         <li *ngFor="let article of articles" class="list-group-item">
-          <a [routerLink]="['/articles', article.id]">
-            <h5>{{ article.title }}</h5>
-            <p>{{ article.content }}</p>
-          </a>
+          <div (click)="toggleContent(article.id)">
+            <h5 style="cursor: pointer;" [class.selected]="isContentExpanded(article.id)">{{ article.title }}</h5>
+          </div>
+          <div *ngIf="isContentExpanded(article.id)" [innerHTML]="article.content | safeHtml" class="mt-3"></div>
         </li>
       </ul>
     </div>
   </div>
 </div>
+

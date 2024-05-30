@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
 import {QuillEditorComponent} from "ngx-quill";
+import {Article} from "../../../../services/models/article";
+import {ArticleService} from "../../../../services/services/article.service";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-create-article',
@@ -9,21 +11,21 @@ import {QuillEditorComponent} from "ngx-quill";
   standalone: true,
   imports: [
     FormsModule,
-    QuillEditorComponent
+    QuillEditorComponent,
+    RouterLink
   ],
   styleUrls: ['./create-article.component.scss']
 })
 export class CreateArticleComponent {
-  article = {
-    title: '',
-    content: ''
-  };
+  article: Article = { title: '', content: '' };
+  required: boolean = true;
 
-  constructor(private http: HttpClient) {}
 
-  onSubmit() {
-    this.http.post('URL_TO_YOUR_API/articles', this.article).subscribe(response => {
-      console.log('Article saved', response);
+  constructor(private articleService: ArticleService, private router: Router) {}
+
+  onSubmit(): void {
+    this.articleService.createArticle(this.article).subscribe(() => {
+      this.router.navigate(['/books/articles']);
     });
   }
 }
