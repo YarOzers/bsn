@@ -17,3 +17,4 @@ networks:
 volumes:
   postgres:
     driver: local
+#  строка для запуска workflow
