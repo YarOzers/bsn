@@ -37,7 +37,7 @@ jobs:
       - name: Copy docker-compose file
         run: |
           echo "Copying docker-compose file to server..."
-          scp -P ${{ secrets.VPS_PORT }}  docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd-bd/docker-compose.yml || (echo "Error during SCP command" && exit 1)
+          scp -P ${{ secrets.VPS_PORT }} docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd-bd/docker-compose.yml || (echo "Error during SCP command" && exit 1)
 
       - name: Create Docker network
         run: |
@@ -171,20 +171,21 @@ jobs:
           VERSION=$(./mvnw -q -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      - name: Login to DockerHub
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          username: ${{secrets.DOCKERHUB_USERNAME}}
-          password: ${{secrets.DOCKERHUB_TOKEN}}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GIT_TOKEN }}
 
-      - name: Build & Push to DockerHub
+      - name: Build & Push to GitHub Container Registry
         uses: docker/build-push-action@v4
         with:
           context: book-network
           file: docker/backend/Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/bsn-api:${{ env.VERSION }},${{secrets.DOCKERHUB_USERNAME}}/bsn-api:latest
+          tags: ghcr.io/yarozers/bsn-api:${{ env.VERSION }},ghcr.io/yarozers/bsn-api:latest
           build-args: |
             PROFILE=dev
             APP_VERSION=${{ env.VERSION }}
@@ -218,11 +219,11 @@ jobs:
           echo "Copying docker-compose file to server..."
           scp -P ${{ secrets.VPS_PORT }}  book-network/docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd/docker-compose.yml || (echo "Error during SCP command" && exit 1)
 
-      - name: Login to DockerHub on server
+      - name: Login to GitHub Container Registry on server
         run: |
-          echo "Logging in to DockerHub on server..."
+          echo "Logging in to GitHub Container Registry on server..."
           ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
-          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GIT_TOKEN }}
           EOF
 
       - name: Set ENV variables and deploy
