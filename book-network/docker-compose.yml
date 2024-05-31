@@ -3,7 +3,7 @@ version: '3.8'
 services:
   bsn-api:
     container_name: bsn-api
-    image: yaroslavozerskiy/bsn-api:1.0.0
+    image: ghcr.io/yarozers/bsn-api:1.0.0
     ports:
       - 9090:9090
     networks:

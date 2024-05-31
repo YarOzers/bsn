@@ -1,7 +1,7 @@
 services:
   bsn-ui:
     container_name: bsn-ui
-    image: yaroslavozerskiy/bsn-ui:1.0.0
+    image: ghcr.io/yarozers/bsn-ui:1.0.0
     ports:
       - 8080:80
     networks:
