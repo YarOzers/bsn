@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Устанавливаем все необходимые зависимости
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Копируем весь проект в Docker-контекст
 COPY . .
