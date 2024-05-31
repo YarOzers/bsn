@@ -41,7 +41,7 @@ jobs:
           file: docker/frontend/Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ghcr.io/${{ github.repository_owner }}/bsn-ui:${{ steps.extract_version.outputs.VERSION }},ghcr.io/${{ github.repository_owner }}/bsn-ui:latest
+          tags: ghcr.io/yarozers/bsn-ui:${{ steps.extract_version.outputs.VERSION }},ghcr.io/yarozers/bsn-ui:latest
           build-args: |
             APP_VERSION=${{ steps.extract_version.outputs.VERSION }}
             # Add more build arguments if needed

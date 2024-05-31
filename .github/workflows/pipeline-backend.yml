@@ -37,7 +37,7 @@ jobs:
       - name: Copy docker-compose file
         run: |
           echo "Copying docker-compose file to server..."
-          scp -P ${{ secrets.VPS_PORT }}  docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd-bd/docker-compose.yml || (echo "Error during SCP command" && exit 1)
+          scp -P ${{ secrets.VPS_PORT }} docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:ci-cd-bd/docker-compose.yml || (echo "Error during SCP command" && exit 1)
 
       - name: Create Docker network
         run: |
@@ -185,7 +185,7 @@ jobs:
           file: docker/backend/Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ghcr.io/${{ github.repository_owner }}/bsn-api:${{ env.VERSION }},ghcr.io/${{ github.repository_owner }}/bsn-api:latest
+          tags: ghcr.io/yarozers/bsn-api:${{ env.VERSION }},ghcr.io/yarozers/bsn-api:latest
           build-args: |
             PROFILE=dev
             APP_VERSION=${{ env.VERSION }}
@@ -223,7 +223,7 @@ jobs:
         run: |
           echo "Logging in to GitHub Container Registry on server..."
           ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
           EOF
 
       - name: Set ENV variables and deploy
