@@ -34,7 +34,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
         servers = {
                 @Server(
                         description = "Local ENV",  // Описание локального окружения
-                        url = "http://188.235.130.37:9090/api/v1"  // URL локального окружения
+                        url = "http://localhost:9090/api/v1"  // URL локального окружения
                 ),
                 @Server(
                         description = "PROD ENV",  // Описание окружения для продакшна
