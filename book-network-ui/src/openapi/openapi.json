@@ -16,7 +16,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:9090/api/v1",
+      "url": "http://188.235.130.37:9090/api/v1",
       "description": "Local ENV"
     },
     {
