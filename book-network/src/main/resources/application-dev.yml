@@ -71,4 +71,4 @@ debug: false
   # Настройки логирования
 logging:
     level:
-      org.springframework: info
+      org.springframework: trace

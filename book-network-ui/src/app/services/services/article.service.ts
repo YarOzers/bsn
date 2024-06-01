@@ -7,7 +7,7 @@ import {Article} from "../models/article";
   providedIn: 'root'
 })
 export class ArticleService {
-  private apiUrl = 'http://localhost:9090/api/v1/articles';
+  private apiUrl = 'http://l188.235.130.37:9090/api/v1/articles';
   constructor(private http: HttpClient) {}
 
   getArticles(): Observable<Article[]> {
