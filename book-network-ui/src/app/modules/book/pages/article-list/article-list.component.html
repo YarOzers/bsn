@@ -1,18 +1,37 @@
 <div class="container mt-5">
-  <div class="card">
-    <div class="card-header">
-      <h2>Articles</h2>
-    </div>
-    <div class="card-body">
-      <ul class="list-group">
-        <li *ngFor="let article of articles" class="list-group-item">
-          <div (click)="toggleContent(article.id)">
-            <h5 style="cursor: pointer;" [class.selected]="isContentExpanded(article.id)">{{ article.title }}</h5>
+  <div class="row">
+    <!-- Сайдбар слева -->
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header">
+          <h2>Themes</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter new theme name" [(ngModel)]="newThemeName">
+            <button class="btn btn-primary mt-2" (click)="addTheme()">Add Theme</button>
           </div>
-          <div *ngIf="isContentExpanded(article.id)" [innerHTML]="article.content | safeHtml" class="mt-3"></div>
-        </li>
-      </ul>
+          <ul class="list-group">
+            <li *ngFor="let theme of themes" class="list-group-item" (click)="onThemeSelect(theme)">
+              <h5 style="cursor: pointer;">{{ theme.name }}</h5>
+              <ul *ngIf="selectedTheme && selectedTheme.id === theme.id">
+                <li *ngFor="let article of theme.articles" (click)="onArticleSelect(article)">
+                  <h6 style="cursor: pointer;">{{ article.title }}</h6>
+                </li>
+              </ul>
+              <div>
+                <button class="btn btn-sm btn-outline-secondary mr-2" (click)="startEditingTheme(theme)">Edit</button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteTheme(theme)">Delete</button>
+                <button class="btn btn-sm btn-outline-primary" (click)="startAddingArticleToTheme(theme)">Add Article</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Основной контент справа -->
+    <div class="col-md-9">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
-

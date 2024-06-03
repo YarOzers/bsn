@@ -1,5 +1,6 @@
 package com.yaroslav.booknetwork.article;
 
+import com.yaroslav.booknetwork.theme.Theme;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,4 +22,8 @@ public class Article {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "theme_id")
+    private Theme theme;
 }

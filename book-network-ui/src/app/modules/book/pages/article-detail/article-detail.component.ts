@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
 import {NgIf} from "@angular/common";
 import {ArticleService} from "../../../../services/services/article.service";
 import {SafeHtmlPipe} from "../../../../pipes/safe-html.pipe";

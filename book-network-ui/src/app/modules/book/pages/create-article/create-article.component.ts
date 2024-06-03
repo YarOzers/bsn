@@ -3,7 +3,7 @@ import {FormsModule} from "@angular/forms";
 import {QuillEditorComponent} from "ngx-quill";
 import {Article} from "../../../../services/models/article";
 import {ArticleService} from "../../../../services/services/article.service";
-import {Router, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-create-article',
@@ -17,15 +17,29 @@ import {Router, RouterLink} from "@angular/router";
   styleUrls: ['./create-article.component.scss']
 })
 export class CreateArticleComponent {
-  article: Article = { title: '', content: '' };
+  article: Article = {
+    id: 0,
+    title: '',
+    content: '',
+    themeId: 0
+  };
+  themeId: number | null = null;
   required: boolean = true;
 
+  constructor(private route: ActivatedRoute, private articleService: ArticleService) {}
 
-  constructor(private articleService: ArticleService, private router: Router) {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params: { [key: string]: any }) => {
+      this.themeId = +params['themeId'] || null;
+    });
+  }
 
   onSubmit(): void {
-    this.articleService.createArticle(this.article).subscribe(() => {
-      this.router.navigate(['/books/articles']);
-    });
+    if (this.themeId) {
+      this.article.themeId = this.themeId;
+      this.articleService.createArticle(this.article).subscribe(response => {
+        // Обработка успешного ответа
+      });
+    }
   }
 }

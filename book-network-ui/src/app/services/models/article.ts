@@ -1,5 +1,6 @@
 export interface Article {
-  id?: number;
+  id: number;
   title: string;
   content: string;
+  themeId: number; // Идентификатор темы, к которой относится статья
 }

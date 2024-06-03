@@ -67,7 +67,9 @@ const routes: Routes = [
         path: "create-article",
         component: CreateArticleComponent,
         canActivate: [authGuard]
-      },
+      }, {path: 'article-list', component: ArticleListComponent},
+      {path: 'create-article', component: CreateArticleComponent},
+      {path: '', redirectTo: '/article-list', pathMatch: 'full'},
       {
         path: '**', redirectTo: '',
         component: BookListComponent,

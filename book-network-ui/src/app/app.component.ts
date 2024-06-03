@@ -4,7 +4,6 @@ import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 import {LoginComponent} from "./pages/login/login.component";
 import {ApiModule} from "./services/api.module";
-import {ApiConfiguration} from "./services/api-configuration";
 
 @Component({
   selector: 'app-root',

@@ -36,6 +36,13 @@ public class ArticleController {
         return articleService.saveArticle(article);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Article> editArticle(@PathVariable Long id, @RequestBody Article editedArticle) {
+        editedArticle.setId(id); // Устанавливаем ID статьи из пути запроса
+        Article updatedArticle = articleService.editArticle(editedArticle);
+        return ResponseEntity.ok(updatedArticle);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
         if (articleService.getArticleById(id).isPresent()) {

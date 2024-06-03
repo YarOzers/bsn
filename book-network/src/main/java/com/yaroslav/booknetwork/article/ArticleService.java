@@ -31,4 +31,21 @@ public class ArticleService {
     public void deleteArticle(Long id) {
         articleRepository.deleteById(id);
     }
+
+    public Article editArticle(Article editedArticle) {
+        // Проверка, существует ли статья с таким ID
+        Optional<Article> existingArticleOptional = articleRepository.findById(editedArticle.getId());
+        if (existingArticleOptional.isPresent()) {
+            // Если статья существует, обновляем ее поля
+            Article existingArticle = existingArticleOptional.get();
+            existingArticle.setTitle(editedArticle.getTitle());
+            existingArticle.setContent(editedArticle.getContent());
+            // Сохраняем обновленную статью и возвращаем ее
+            return articleRepository.save(existingArticle);
+        } else {
+            // Если статья с таким ID не существует, можете выбрать соответствующее действие,
+            // например, бросить исключение или вернуть null
+            throw new IllegalArgumentException("Article with ID " + editedArticle.getId() + " not found");
+        }
+    }
 }
