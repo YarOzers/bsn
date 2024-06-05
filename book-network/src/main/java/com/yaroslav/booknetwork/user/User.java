@@ -27,9 +27,9 @@ import java.util.stream.Collectors;
 @Builder // генерирует метод для создания объектов класса с помощью builder-паттерна
 @AllArgsConstructor // генерирует конструктор с параметрами для всех полей класса
 @NoArgsConstructor // генерирует пустой конструктор для класса
-@Entity // указывает, что класс является сущностью для работы с базой данных
-@Table(name = "_user") // указывает имя таблицы в базе данных для данной сущности
-@EntityListeners(AuditingEntityListener.class)
+//@Entity // указывает, что класс является сущностью для работы с базой данных
+//@Table(name = "_user") // указывает имя таблицы в базе данных для данной сущности
+//@EntityListeners(AuditingEntityListener.class)
 // указывает, что для данной сущности нужно использовать класс EntityListener для обработки событий изменения данных
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Slf4j

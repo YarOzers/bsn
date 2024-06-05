@@ -40,10 +40,10 @@ public class Book extends BaseEntity { // Наследуется от BaseEntity
     boolean shareable; // Флаг, указывающий, что книгу можно делить или передавать
 
     // Ассоциация Many-to-One: книга принадлежит одному владельцу (User)
-    @ManyToOne // Определяет связь "многие к одному"
-    @JoinColumn(name = "owner_id") // Указывает, что внешний ключ хранится в этой таблице
-    @JsonIgnore
-    User owner; // Владелец книги (связь с User)
+//    @ManyToOne // Определяет связь "многие к одному"
+//    @JoinColumn(name = "owner_id") // Указывает, что внешний ключ хранится в этой таблице
+//    @JsonIgnore
+//    User owner; // Владелец книги (связь с User)
 
     // Ассоциация One-to-Many: книга может иметь несколько отзывов (Feedback)
     @OneToMany(mappedBy = "book") // Определяет связь "один ко многим", связанная через поле "book"

@@ -9,7 +9,7 @@ spring:
   # Настройки JPA (Java Persistence API)
   jpa:
     hibernate:
-      ddl-auto: update # Автоматически обновлять схему базы данных при запуске приложения
+      ddl-auto: create # Автоматически обновлять схему базы данных при запуске приложения
     show-sql: true # Выводить SQL-запросы в логи
     properties:
       hibernate:
@@ -50,16 +50,21 @@ spring:
     protocol: smtp
 
 # Настройки безопасности приложения
-application:
   security:
-    jwt:
-      secret-key: 8XPKZ9SSPM4LFG4MJCTIX0WHF27E6L4UJGPY88K3X5IWKJ2AR5TI1G0W7CJQDOGS # Секретный ключ для генерации и проверки JWT-токенов
-      expiration: 8640000 # Время жизни JWT-токена в миллисекундах (24 часа)
-  mailing:
-    frontend:
-      activation-url: http://bsn-ui:4200/activate-account
-  cors:
-    origins: http://localhost:8080,http://localhost:4200,http://188.235.130.37
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "http://localhost:9999/realms/book-social-network"
+application:
+#  security:
+#    jwt:
+#      secret-key: 8XPKZ9SSPM4LFG4MJCTIX0WHF27E6L4UJGPY88K3X5IWKJ2AR5TI1G0W7CJQDOGS # Секретный ключ для генерации и проверки JWT-токенов
+#      expiration: 8640000 # Время жизни JWT-токена в миллисекундах (24 часа)
+#  mailing:
+#    frontend:
+#      activation-url: http://bsn-ui:4200/activate-account
+#  cors:
+#    origins: http://localhost:8080,http://localhost:4200,http://188.235.130.37
   file:
     upload:
       photos-output-path: ./uploads
@@ -71,4 +76,6 @@ debug: false
   # Настройки логирования
 logging:
     level:
-      org.springframework: trace
+      org.springframework: debug
+      org.org.springframework.security: debug
+      org.springframework.security: debug

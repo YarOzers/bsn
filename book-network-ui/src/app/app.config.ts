@@ -3,7 +3,7 @@ import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
 import {provideClientHydration} from '@angular/platform-browser';
-import {provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
+import { provideHttpClient, withFetch, withInterceptors } from "@angular/common/http";
 import {httpTokenInterceptor} from "./services/interceptor/http-token.interceptor";
 import {KeycloakService} from "./services/keycloak/keycloak.service";
 

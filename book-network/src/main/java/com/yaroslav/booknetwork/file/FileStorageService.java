@@ -34,7 +34,7 @@ public class FileStorageService { // Класс, представляющий с
      */
     public String saveFile(
             @NonNull MultipartFile sourceFile, // Указывает, что аргумент не может быть null
-            @NonNull Integer userId) { // Идентификатор пользователя, с которым связан файл
+            @NonNull String userId) { // Идентификатор пользователя, с которым связан файл
         // Создание подкаталога для пользователя
         final String fileUploadSubPath = "users" + File.separator + userId;
         return uploadFile(sourceFile, fileUploadSubPath); // Загружает файл в соответствующий подкаталог

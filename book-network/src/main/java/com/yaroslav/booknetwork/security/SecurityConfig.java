@@ -24,8 +24,8 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfig {
 
     // Два финальных поля для зависимостей, внедренных через конструктор
-    private final JwtFilter jwtAuthFilter; // Фильтр для JWT аутентификации
-    private final AuthenticationProvider authenticationProvider; // Провайдер аутентификации
+//    private final JwtFilter jwtAuthFilter; // Фильтр для JWT аутентификации
+//    private final AuthenticationProvider authenticationProvider; // Провайдер аутентификации
 
     // Метод, создающий цепочку фильтров безопасности
     @Bean // Аннотация, указывающая, что этот метод создает Spring Bean
@@ -49,13 +49,15 @@ public class SecurityConfig {
                                 .authenticated() // Требуют авторизации
                 )
                 // Настройка управления сессиями
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(STATELESS) // Устанавливает режим без сессий
-                )
-                // Установка провайдера аутентификации
-                .authenticationProvider(authenticationProvider)
-                // Добавление JWT фильтра перед стандартным фильтром аутентификации
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+//                .sessionManagement(session ->
+//                        session.sessionCreationPolicy(STATELESS) // Устанавливает режим без сессий
+//                )
+//                // Установка провайдера аутентификации
+//                .authenticationProvider(authenticationProvider)
+//                // Добавление JWT фильтра перед стандартным фильтром аутентификации
+//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .oauth2ResourceServer(auth ->
+                        auth.jwt(token -> token.jwtAuthenticationConverter(new KeycloakJwtAuthenticationConverter())));
 
         return http.build(); // Возвращает созданную цепочку фильтров
     }

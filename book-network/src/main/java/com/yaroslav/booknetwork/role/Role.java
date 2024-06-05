@@ -17,9 +17,9 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table
-@EntityListeners(AuditingEntityListener.class)
+//@Entity
+//@Table
+//@EntityListeners(AuditingEntityListener.class)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Role {
 

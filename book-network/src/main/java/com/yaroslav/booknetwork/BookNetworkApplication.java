@@ -19,14 +19,14 @@ public class BookNetworkApplication {
     }
 
     //Добавляем поле USER в таблицу role при запуске приложения
-    @Bean
-    public CommandLineRunner runner(RoleRepository roleRepository){
-        return args -> {
-            if(roleRepository.findByName("USER").isEmpty()){
-                roleRepository.save(
-                        Role.builder().name("USER").build()
-                );
-            }
-        };
-    }
+//    @Bean
+//    public CommandLineRunner runner(RoleRepository roleRepository){
+//        return args -> {
+//            if(roleRepository.findByName("USER").isEmpty()){
+//                roleRepository.save(
+//                        Role.builder().name("USER").build()
+//                );
+//            }
+//        };
+//    }
 }

@@ -14,12 +14,11 @@ public class BookSpecification {
      * @param ownerId Идентификатор владельца книг.
      * @return Спецификация для поиска книг, принадлежащих владельцу с заданным ID.
      */
-    public static Specification<Book> withOwnerId(Integer ownerId) {
+    public static Specification<Book> withOwnerId(String ownerId) {
         // Возвращает спецификацию, которая создает критерий равенства для поля "id" в ассоциации "owner"
         return (root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(
-                        root.get("owner") // Получает связь "owner" из текущей сущности
-                                .get("id"),    // Получает поле "id" из ассоциации "owner"
+                        root.get("createdBy"),
                         ownerId // Сравнивает с заданным идентификатором владельца
                 );
     }

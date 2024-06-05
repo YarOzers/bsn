@@ -1,46 +1,34 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {TokenService} from "../../../../services/token/token.service";
-import jwt_decode from 'jwt-decode';
+import {KeycloakService} from "../../../../services/keycloak/keycloak.service";
+import {KeycloakAngularModule} from "keycloak-angular";
 
 @Component({
   selector: 'app-menu',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
+    KeycloakAngularModule
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent implements AfterViewInit, OnInit {
-  userName: string = '';
+  userName: string | undefined = '';
   decodedToken: any;
 
   constructor(private tokenService: TokenService,
-              private router: Router) {
+              private router: Router,
+              private keycloakService: KeycloakService) {
   }
 
   ngOnInit() {
-    const token = localStorage.getItem('token'); // Убедитесь, что это строка
-    if (token) {
-      this.decodedToken = this.decodeToken(token);
-      console.log(this.decodedToken.fullName.firstname);
-    }
-  }
-  decodeToken(token: string): any {
-    try {
-      return jwt_decode(token); // Убедитесь, что jwt_decode - это функция
-    } catch (error) {
-      console.error('Ошибка при декодировании токена:', error);
-      return null;
-    }
+    this.userName = this.keycloakService.getUserName();
   }
 
-  logout() {
-    this.tokenService.clearToken();
-    this.router.navigate(['login'])
-
-
+  async logout() {
+    this.keycloakService.keycloak?.logout();
   }
 
   ngAfterViewInit(): void {
@@ -67,4 +55,7 @@ export class MenuComponent implements AfterViewInit, OnInit {
     }
   }
 
+  async manageAccount() {
+    return this.keycloakService.keycloak?.accountManagement();
+  }
 }

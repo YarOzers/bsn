@@ -29,40 +29,42 @@ public class BeansConfig {
     private List<String> allowedOrigins;
 
     // Поле для UserDetailsService, используемого при аутентификации пользователей
-    private final UserDetailsService userDetailsService;
-
-    /**
-     * Создает бин AuthenticationProvider, который используется для аутентификации пользователей.
-     * В данной реализации используется DaoAuthenticationProvider, который требует UserDetailsService и PasswordEncoder.
-     */
+//    private final UserDetailsService userDetailsService;
+//
+//    /**
+//     * Создает бин AuthenticationProvider, который используется для аутентификации пользователей.
+//     * В данной реализации используется DaoAuthenticationProvider, который требует UserDetailsService и PasswordEncoder.
+//     */
+//    @Bean
+//    public AuthenticationProvider authenticationProvider() {
+//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(); // Использует UserDetailsService и PasswordEncoder
+//        authenticationProvider.setUserDetailsService(userDetailsService); // Устанавливает сервис для загрузки деталей пользователя
+//        authenticationProvider.setPasswordEncoder(passwordEncoder()); // Устанавливает метод шифрования паролей
+//        return authenticationProvider; // Возвращает готовый AuthenticationProvider
+//    }
+//
+//    /**
+//     * Создает бин AuthenticationManager, который управляет процессом аутентификации.
+//     * Получает менеджера аутентификации из конфигурации.
+//     */
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+//        return config.getAuthenticationManager(); // Возвращает менеджера аутентификации
+//    }
+//
+//
+//    /**
+//     * Создает бин PasswordEncoder, который используется для шифрования и сравнения паролей.
+//     * В данном случае используется BCryptPasswordEncoder, который применяет алгоритм bcrypt.
+//     */
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder(); // Возвращает реализацию для шифрования паролей
+//    }
     @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(); // Использует UserDetailsService и PasswordEncoder
-        authenticationProvider.setUserDetailsService(userDetailsService); // Устанавливает сервис для загрузки деталей пользователя
-        authenticationProvider.setPasswordEncoder(passwordEncoder()); // Устанавливает метод шифрования паролей
-        return authenticationProvider; // Возвращает готовый AuthenticationProvider
-    }
+    public AuditorAware<String> auditorAware(){
 
-    /**
-     * Создает бин AuthenticationManager, который управляет процессом аутентификации.
-     * Получает менеджера аутентификации из конфигурации.
-     */
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager(); // Возвращает менеджера аутентификации
-    }
-
-    @Bean
-    public AuditorAware<Integer> auditorAware(){
         return new ApplicationAuditAware();
-    }
-    /**
-     * Создает бин PasswordEncoder, который используется для шифрования и сравнения паролей.
-     * В данном случае используется BCryptPasswordEncoder, который применяет алгоритм bcrypt.
-     */
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Возвращает реализацию для шифрования паролей
     }
 
     /**
