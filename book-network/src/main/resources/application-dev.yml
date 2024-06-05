@@ -54,7 +54,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: "http://localhost:9999/realms/book-social-network"
+          issuer-uri: "http://188.235.130.37:9999/realms/book-social-network"
 application:
 #  security:
 #    jwt:

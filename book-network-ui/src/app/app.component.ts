@@ -9,7 +9,7 @@ import {ApiModule} from "./services/api.module";
   imports: [RouterOutlet,
     CommonModule,
     LoginComponent,
-    ApiModule.forRoot({rootUrl: 'http://localhost:9090/api/v1'}).ngModule],
+    ApiModule.forRoot({rootUrl: 'http://188.235.130.37:9090/api/v1'}).ngModule],
   providers: [],
   selector: 'app-root',
   standalone: true, styleUrl: './app.component.scss',

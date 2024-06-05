@@ -8,7 +8,7 @@ import { Theme } from "../models/theme";
   providedIn: 'root'
 })
 export class ArticleService {
-  private apiUrl = 'http://localhost:9090/api/v1'; // Базовый URL вашего API
+  private apiUrl = 'http://188.235.130.37:9090/api/v1'; // Базовый URL вашего API
 
   constructor(private http: HttpClient) {}
 
