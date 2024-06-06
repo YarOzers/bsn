@@ -23,7 +23,7 @@ FROM nginx:alpine AS deploy-stage
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Копируем собранное Angular-приложение в директорию Nginx
-COPY --from=build-stage /app/dist/book-network-ui /usr/share/nginx/html
+COPY --from=build-stage /app/dist/book-network-ui /usr/share/nginx/html/browser
 
 # Открываем порт 80
 EXPOSE 80
