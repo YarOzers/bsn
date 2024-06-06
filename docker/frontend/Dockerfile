@@ -14,7 +14,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Запускаем команду сборки Angular-приложения
-RUN npm run build --prod --base-href mysubfolder
+RUN npm run build --prod --base-href book-network-ui
 
 # Этап развертывания с помощью Nginx
 FROM nginx:alpine AS deploy-stage
